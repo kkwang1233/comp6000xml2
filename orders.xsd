@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   New Perspectives on XML
+   Tutorial 3
+   Case Problem 4
+
+   Map Finds For You schema
+   Author:  Kaishuo Wang
+   Date:     03/11/2024
+
+   Filename:         orders.xsd
+   Supporting Files: orders.xml
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="customers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="customer" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="title" type="xs:string" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <!-- Define address, phone, email -->
+              <xs:element name="address" type="xs:string"/>
+              <xs:element name="phone" type="xs:string"/>
+              <xs:element name="email" type="xs:string"/>
+              <!-- Define orders element -->
+              <xs:element name="orders">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="order" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="orderDate" type="xs:date"/>
+                          <xs:element name="items">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="item" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="itemPrice">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="saleItem" type="xs:string" use="optional"/>
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="itemQty" type="xs:integer"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="itemNumber" type="xs:string" use="required"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="orderID" type="xs:string" use="required"/>
+                        <xs:attribute name="orderBy" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="custID" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
